@@ -10,8 +10,6 @@
 
 <h2>Phone GPS Location</h2>
 
-<button onclick="getLocation()">Get My Location</button>
-
 <p id="status">Waiting...</p>
 <p id="latitude"></p>
 <p id="longitude"></p>
@@ -76,6 +74,9 @@ function getLocation() {
 
   );
 }
+window.onload = function() {
+  getLocation();
+};
 </script>
 
 </body>
