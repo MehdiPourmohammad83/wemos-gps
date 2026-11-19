@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPS Test</title>
+</head>
+<body>
+
+<h2>Phone GPS Location</h2>
+
+<button onclick="getLocation()">Get My Location</button>
+
+<p id="status">Waiting...</p>
+<p id="latitude"></p>
+<p id="longitude"></p>
+<p id="accuracy"></p>
+
+<script>
+function getLocation() {
+
+  if (!navigator.geolocation) {
+    document.getElementById("status").innerText =
+      "GPS is not supported!";
+    return;
+  }
+
+  document.getElementById("status").innerText =
+    "Getting location...";
+
+  navigator.geolocation.getCurrentPosition(
+
+    function(position) {
+
+      document.getElementById("status").innerText =
+        "Location received successfully!";
+
+      document.getElementById("latitude").innerText =
+        "Latitude: " + position.coords.latitude;
+
+      document.getElementById("longitude").innerText =
+        "Longitude: " + position.coords.longitude;
+
+      document.getElementById("accuracy").innerText =
+        "Accuracy: " + position.coords.accuracy + " meters";
+
+    },
+
+    function(error) {
+
+      document.getElementById("status").innerText =
+        "Error: " + error.message;
+
+    },
+
+    {
+      enableHighAccuracy: true,
+      timeout: 15000,
+      maximumAge: 0
+    }
+
+  );
+}
+</script>
+
+</body>
+</html>
