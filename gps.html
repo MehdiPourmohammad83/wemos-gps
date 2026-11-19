@@ -18,6 +18,7 @@
 <p id="accuracy"></p>
 
 <script>
+
 function getLocation() {
 
   if (!navigator.geolocation) {
@@ -33,17 +34,30 @@ function getLocation() {
 
     function(position) {
 
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      const accuracy = position.coords.accuracy;
+
       document.getElementById("status").innerText =
-        "Location received successfully!";
+        "Location received! Sending to Wemos...";
 
       document.getElementById("latitude").innerText =
-        "Latitude: " + position.coords.latitude;
+        "Latitude: " + latitude;
 
       document.getElementById("longitude").innerText =
-        "Longitude: " + position.coords.longitude;
+        "Longitude: " + longitude;
 
       document.getElementById("accuracy").innerText =
-        "Accuracy: " + position.coords.accuracy + " meters";
+        "Accuracy: " + accuracy + " meters";
+
+      // Automatically send GPS location to Wemos
+      window.location.href =
+        "http://10.99.83.123/setlocation?lat=" +
+        latitude +
+        "&lon=" +
+        longitude +
+        "&accuracy=" +
+        accuracy;
 
     },
 
